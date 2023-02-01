@@ -1,0 +1,7 @@
+"""Goals for Feburary
+Make it so that you can start the game after dying without exiting and going back in
+Put in controls so others can test on their computer
+Balance out characters
+Implement custom tiles into the game
+Get the custom map generation running
+"""

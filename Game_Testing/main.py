@@ -20,7 +20,7 @@ def main() -> None:
 
     tileset = tcod.tileset.load_tilesheet(
         "ASCII.png", 32, 8, tcod.tileset.CHARMAP_TCOD
-    )
+    ) 
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 

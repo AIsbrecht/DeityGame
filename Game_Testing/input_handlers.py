@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-
 from typing import Callable, Optional, Tuple, TYPE_CHECKING, Union
 import tcod.event
 
@@ -20,7 +19,16 @@ if TYPE_CHECKING:
     from engine import Engine
     from entity import Item
 
-MOVE_KEYS = {
+ALEX_MOVE_KEYS = {
+    # Vi keys.
+    tcod.event.K_a: (-1, 0),
+    tcod.event.K_r: (0, 1),
+    tcod.event.K_w: (0, -1),
+    tcod.event.K_s: (1, 0),
+    tcod.event.K_w and tcod.event.K_a: (-1, -1),
+    tcod.event.K_w and tcod.event.K_s: (1, -1),
+    tcod.event.K_a and tcod.event.K_r: (-1, 1),
+    tcod.event.K_s and tcod.event.K_r:(1, 1),
     #Arrow keys
     tcod.event.K_UP: (0, -1),
     tcod.event.K_DOWN: (0, 1),
@@ -39,15 +47,37 @@ MOVE_KEYS = {
     tcod.event.K_KP_7: (-1, -1),
     tcod.event.K_KP_8: (0, -1),
     tcod.event.K_KP_9: (1, -1),
+}
+
+NORMAL_MOVE_KEYS = {
     # Vi keys.
     tcod.event.K_a: (-1, 0),
-    tcod.event.K_r: (0, 1),
+    tcod.event.K_s: (0, 1),
     tcod.event.K_w: (0, -1),
-    tcod.event.K_s: (1, 0),
-    tcod.event.K_q: (-1, -1),
-    tcod.event.K_f: (1, -1),
-    tcod.event.K_c: (-1, 1),
-    tcod.event.K_z: (1, 1),
+    tcod.event.K_d: (1, 0),
+    tcod.event.K_l: (-1, -1),
+    tcod.event.K_u: (1, -1),
+    tcod.event.K_n: (-1, 1),
+    tcod.event.K_m: (1, 1),
+    #Arrow keys
+    tcod.event.K_UP: (0, -1),
+    tcod.event.K_DOWN: (0, 1),
+    tcod.event.K_LEFT: (-1, 0),
+    tcod.event.K_RIGHT: (1, 0),
+    tcod.event.K_HOME: (-1, -1),
+    tcod.event.K_END: (-1, 1),
+    tcod.event.K_PAGEUP: (1, -1),
+    tcod.event.K_PAGEDOWN: (1, 1),
+    # Numpad keys.
+    tcod.event.K_KP_1: (-1, 1),
+    tcod.event.K_KP_2: (0, 1),
+    tcod.event.K_KP_3: (1, 1),
+    tcod.event.K_KP_4: (-1, 0),
+    tcod.event.K_KP_6: (1, 0),
+    tcod.event.K_KP_7: (-1, -1),
+    tcod.event.K_KP_8: (0, -1),
+    tcod.event.K_KP_9: (1, -1),
+
 }
 
 WAIT_KEYS = {
@@ -69,6 +99,12 @@ If an action is returned it will be attempted and if it's valid then
 MainGameEventHandler will become the active handler.
 """
 
+def keyboard_layout():
+    keyboard_Alex = False
+    if keyboard_Alex == True:
+        return ALEX_MOVE_KEYS
+    else:
+        return NORMAL_MOVE_KEYS 
 
 class BaseEventHandler(tcod.event.EventDispatch[ActionOrHandler]):
     def handle_events(self, event: tcod.event.Event) -> BaseEventHandler:
@@ -409,7 +445,7 @@ class SelectIndexHandler(AskUserEventHandler):
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
         """Check for key movement or confirmation keys."""
         key = event.sym
-        if key in MOVE_KEYS:
+        if key in keyboard_layout():
             modifier = 1  # Holding modifier keys will speed up key movement.
             if event.mod & (tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT):
                 modifier *= 5
@@ -419,7 +455,7 @@ class SelectIndexHandler(AskUserEventHandler):
                 modifier *= 20
 
             x, y = self.engine.mouse_location
-            dx, dy = MOVE_KEYS[key]
+            dx, dy = keyboard_layout()[key]
             x += dx * modifier
             y += dy * modifier
             # Clamp the cursor index to the map size.
@@ -511,8 +547,8 @@ class MainGameEventHandler(EventHandler):
         ):
             return actions.TakeStairsAction(player)
 
-        if key in MOVE_KEYS:
-            dx, dy = MOVE_KEYS[key]
+        if key in keyboard_layout():
+            dx, dy = keyboard_layout()[key]
             action = BumpAction(player, dx, dy)
             
         elif key in WAIT_KEYS:
