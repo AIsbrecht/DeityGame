@@ -19,16 +19,29 @@ if TYPE_CHECKING:
     from engine import Engine
     from entity import Item
 
+def diagonals(key, modifier):
+    event = tcod.event.KeyDown
+    if key == tcod.event.K_w and modifier & (tcod.event.K_a):
+        return (-1, -1)
+    elif key == tcod.event.K_w and modifier & (tcod.event.K_s):
+        return (1, -1)
+    elif key == tcod.event.K_r and modifier & (tcod.event.K_s):
+        return (1, 1)
+    elif key == tcod.event.K_r and modifier & (tcod.event.K_a):
+        return (-1, 1)
+    else:
+        return False
+    
 ALEX_MOVE_KEYS = {
     # Vi keys.
     tcod.event.K_a: (-1, 0),
     tcod.event.K_r: (0, 1),
     tcod.event.K_w: (0, -1),
     tcod.event.K_s: (1, 0),
-    tcod.event.K_w and tcod.event.K_a: (-1, -1),
-    tcod.event.K_w and tcod.event.K_s: (1, -1),
-    tcod.event.K_a and tcod.event.K_r: (-1, 1),
-    tcod.event.K_s and tcod.event.K_r:(1, 1),
+    tcod.event.K_y: (-1, -1),
+    tcod.event.K_i: (1, -1),
+    tcod.event.K_h: (-1, 1),
+    tcod.event.K_n:(1, 1),
     #Arrow keys
     tcod.event.K_UP: (0, -1),
     tcod.event.K_DOWN: (0, 1),
@@ -47,6 +60,7 @@ ALEX_MOVE_KEYS = {
     tcod.event.K_KP_7: (-1, -1),
     tcod.event.K_KP_8: (0, -1),
     tcod.event.K_KP_9: (1, -1),
+    #Testing
 }
 
 NORMAL_MOVE_KEYS = {
@@ -100,7 +114,7 @@ MainGameEventHandler will become the active handler.
 """
 
 def keyboard_layout():
-    keyboard_Alex = False
+    keyboard_Alex = True
     if keyboard_Alex == True:
         return ALEX_MOVE_KEYS
     else:
@@ -546,8 +560,10 @@ class MainGameEventHandler(EventHandler):
             tcod.event.KMOD_LSHIFT | tcod.event.KMOD_RSHIFT
         ):
             return actions.TakeStairsAction(player)
-
-        if key in keyboard_layout():
+        if diagonals(key, modifier) != False:
+            dx, dy = diagonals(key, modifier)
+            action = BumpAction(player, dx, dy)
+        elif key in keyboard_layout():
             dx, dy = keyboard_layout()[key]
             action = BumpAction(player, dx, dy)
             
