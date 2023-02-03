@@ -114,7 +114,7 @@ MainGameEventHandler will become the active handler.
 """
 
 def keyboard_layout():
-    keyboard_Alex = True
+    keyboard_Alex = False
     if keyboard_Alex == True:
         return ALEX_MOVE_KEYS
     else:
