@@ -5,10 +5,12 @@ import copy
 import lzma
 import pickle
 import traceback
+import random
 from typing import Optional
 
 import tcod
 
+import entity_factories
 import color
 from engine import Engine
 import entity_factories
@@ -21,7 +23,7 @@ import input_handlers
 background_image = tcod.image.load("menu_background.png")[:, :, :3]
 
 
-def new_game(key) -> Engine:
+def new_game(character) -> Engine:
     """Return a brand new game session as an Engine instance."""
     map_width = 80
     map_height = 43
@@ -30,12 +32,12 @@ def new_game(key) -> Engine:
     room_min_size = 6
     max_rooms = 30
 
-    if key == "k":
-        player = copy.deepcopy(entity_factories.knight)
-    elif key == "r":
-        player = copy.deepcopy(entity_factories.rogue)
-    elif key == "c":
-        player = copy.deepcopy(entity_factories.cleric)
+    if character == "artemis":
+        player = copy.deepcopy(entity_factories.artemis)
+    elif character == "aries":
+        player = copy.deepcopy(entity_factories.aries)
+    elif character == "aphrodite":
+        player = copy.deepcopy(entity_factories.aphrodite)
 
     engine = Engine(player=player)
 
@@ -52,7 +54,7 @@ def new_game(key) -> Engine:
     engine.update_fov()
 
     engine.message_log.add_message(
-        "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+        "Hello and welcome to yet another dungeon!", color.welcome_text
     )
 
     dagger = copy.deepcopy(entity_factories.dagger)
@@ -101,7 +103,7 @@ class MainMenu(input_handlers.BaseEventHandler):
 
         menu_width = 24
         for i, text in enumerate(
-            ["[K] Play as Knight", "[R] Play as Rogue", "[C] Play as Cleric", "[L] Continue last game", "[Q] Quit"]
+            ["[N] New Game", "[L] Continue last game", "[Q] Quit"]
         ):
             console.print(
                 console.width // 2,
@@ -116,9 +118,10 @@ class MainMenu(input_handlers.BaseEventHandler):
     def ev_keydown(
         self, event: tcod.event.KeyDown
     ) -> Optional[input_handlers.BaseEventHandler]:
+        character = random.randint(1, 3)
         if event.sym in (tcod.event.K_q, tcod.event.K_ESCAPE):
             raise SystemExit()
-        elif event.sym == tcod.event.K_c:
+        elif event.sym == tcod.event.K_l:
             try:
                 return input_handlers.MainGameEventHandler(load_game("savegame.sav"))
             except FileNotFoundError:
@@ -127,11 +130,14 @@ class MainMenu(input_handlers.BaseEventHandler):
                 traceback.print_exc()  # Print to stderr.
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
             pass
-        elif event.sym == tcod.event.K_k:
-            return input_handlers.MainGameEventHandler(new_game("k"))
-        elif event.sym == tcod.event.K_r:
-            return input_handlers.MainGameEventHandler(new_game("r"))
-        elif event.sym == tcod.event.K_c:
-            return input_handlers.MainGameEventHandler(new_game("c"))
+        elif event.sym == tcod.event.K_n:
+            if character == 1:
+                return input_handlers.MainGameEventHandler(new_game("artemis"))
+            elif character == 2:
+                return input_handlers.MainGameEventHandler(new_game("aries"))
+            else:
+                return input_handlers.MainGameEventHandler(new_game("aphrodite"))
+        
+        
 
         return None

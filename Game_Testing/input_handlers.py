@@ -39,7 +39,7 @@ ALEX_MOVE_KEYS = {
     tcod.event.K_w: (0, -1),
     tcod.event.K_s: (1, 0),
     tcod.event.K_y: (-1, -1),
-    tcod.event.K_i: (1, -1),
+    tcod.event.K_l: (1, -1),
     tcod.event.K_h: (-1, 1),
     tcod.event.K_n:(1, 1),
     #Arrow keys
@@ -114,7 +114,7 @@ MainGameEventHandler will become the active handler.
 """
 
 def keyboard_layout():
-    keyboard_Alex = False
+    keyboard_Alex = True
     if keyboard_Alex == True:
         return ALEX_MOVE_KEYS
     else:
