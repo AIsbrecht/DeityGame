@@ -1,0 +1,19 @@
+V_0.1.0
+31/1/2023
+Finished tutorial of the game making process. Added custom potions and enemies in to entity_factories.py.
+Files for custom room generation was added but not implemented. Labeled rooms.py and generate_floor.py.
+
+1/2/2023
+Diagonal attempt was made. Not how I would like it but it is progress.
+Nobody can currently play the game but there is now a variable on line 117 of input_handlers.py that allows me to switch the controls between mine and everyone else's.
+Git Hub set up.
+
+2/2/2023
+.Exe working after a lot of work. Works on other computers.
+Fighter classes have been added by adding entities to entity_factories and chaning the set up of the game in setup_game.py Knight, Rogue, and Cleric have all been added.
+Icarus was added as a hostile but not implemented into the game.
+
+V_0.1.1
+3/2/2023
+Classes have been switched!
+They are now based on Greek gods and the game now selects them randomly for you at the start of each game. Aries, Artemis, and Aphrodite were all added.
