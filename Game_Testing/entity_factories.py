@@ -9,6 +9,11 @@ import equippable
 #From walkthrough
 player = Actor(char="@", color=(255, 255, 255), name="Player", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=30, base_defense=1, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
 
+#Character Classes
+knight = Actor(char="@", color=(192, 192, 192), name="Knight", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=30, base_defense=1, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
+rogue = Actor(char="@", color=(0, 0, 0), name="Rogue", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=15, base_defense=1, base_power=4), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
+cleric = Actor(char="@", color=(255, 255, 255), name="Cleric", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=50, base_defense=2, base_power=1), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
+
 orc = Actor(char="o", color=(63, 127, 63), name="Orc", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=10, base_defense=0, base_power=3), inventory=Inventory(capacity=0), level=Level(xp_given=10),)#weak mob
 troll = Actor(char="T", color=(0, 127, 0), name="Troll", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=16, base_defense=1, base_power=4), inventory=Inventory(capacity=0), level=Level(xp_given=35),)#semi weak mob
 #weak 10PP
@@ -35,6 +40,7 @@ hydra = Actor(char="Y", color=(0,0,255), name="Hydra", ai_cls=HostileEnemy, equi
 cerberus = Actor(char="B", color=(0,0,255), name="Cerberus", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=20, base_defense=5, base_power=25), inventory=Inventory(capacity=0), level=Level(xp_given=200),)#boss?
 scylla = Actor(char="*", color=(0,0,255), name="Scylla", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=17, base_defense=3, base_power=5), inventory=Inventory(capacity=0), level=Level(xp_given=100),)#boss? Together with bottom
 charybdis = Actor(char="^", color=(0,0,255), name="Charybdis", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=10, base_defense=10, base_power=5), inventory=Inventory(capacity=0), level=Level(xp_given=100),)#boss?
+Icarus = Actor(char="{", color=(0,0,255), name="Icarus", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=20, base_defense=5, base_power=25), inventory=Inventory(capacity=0), level=Level(xp_given=200),)#boss?
 #final floor 100PP
 typhon = Actor(char="!", color=(255,255,255), name="Typhon", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=60, base_defense=10, base_power=30), inventory=Inventory(capacity=0), level=Level(xp_given=1000),)#final boss?
 echidna = Actor(char="%", color=(255,255,255), name="Echidna", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=80, base_defense=15, base_power=5), inventory=Inventory(capacity=0), level=Level(xp_given=500),)#semi final boss?

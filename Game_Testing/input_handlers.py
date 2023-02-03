@@ -114,7 +114,7 @@ MainGameEventHandler will become the active handler.
 """
 
 def keyboard_layout():
-    keyboard_Alex = True
+    keyboard_Alex = False
     if keyboard_Alex == True:
         return ALEX_MOVE_KEYS
     else:
@@ -576,16 +576,28 @@ class MainGameEventHandler(EventHandler):
         elif key == tcod.event.K_v:
             return HistoryViewer(self.engine)
 
+        elif key == tcod.event.K_f:
+            action = PickupAction(player)
+        elif key == tcod.event.K_e:
+            action = PickupAction(player)
         elif key == tcod.event.K_t:
             action = PickupAction(player)
 
         elif key == tcod.event.K_g:
             return InventoryActivateHandler(self.engine)
+        elif key == tcod.event.K_TAB:
+            return InventoryActivateHandler(self.engine)
         elif key == tcod.event.K_j:
+            return InventoryDropHandler(self.engine)
+        elif key == tcod.event.K_q:
             return InventoryDropHandler(self.engine)
         elif key == tcod.event.K_b:
             return CharacterScreenEventHandler(self.engine)
+        elif key == tcod.event.K_i:
+            return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.K_SLASH:
+            return LookHandler(self.engine)
+        elif key == tcod.event.K_CAPSLOCK:
             return LookHandler(self.engine)
 
         return action

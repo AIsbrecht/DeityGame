@@ -21,7 +21,7 @@ import input_handlers
 background_image = tcod.image.load("menu_background.png")[:, :, :3]
 
 
-def new_game() -> Engine:
+def new_game(key) -> Engine:
     """Return a brand new game session as an Engine instance."""
     map_width = 80
     map_height = 43
@@ -30,7 +30,12 @@ def new_game() -> Engine:
     room_min_size = 6
     max_rooms = 30
 
-    player = copy.deepcopy(entity_factories.player)
+    if key == "k":
+        player = copy.deepcopy(entity_factories.knight)
+    elif key == "r":
+        player = copy.deepcopy(entity_factories.rogue)
+    elif key == "c":
+        player = copy.deepcopy(entity_factories.cleric)
 
     engine = Engine(player=player)
 
@@ -96,7 +101,7 @@ class MainMenu(input_handlers.BaseEventHandler):
 
         menu_width = 24
         for i, text in enumerate(
-            ["[N] Play a new game", "[C] Continue last game", "[Q] Quit"]
+            ["[K] Play as Knight", "[R] Play as Rogue", "[C] Play as Cleric", "[L] Continue last game", "[Q] Quit"]
         ):
             console.print(
                 console.width // 2,
@@ -122,7 +127,11 @@ class MainMenu(input_handlers.BaseEventHandler):
                 traceback.print_exc()  # Print to stderr.
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
             pass
-        elif event.sym == tcod.event.K_n:
-            return input_handlers.MainGameEventHandler(new_game())
+        elif event.sym == tcod.event.K_k:
+            return input_handlers.MainGameEventHandler(new_game("k"))
+        elif event.sym == tcod.event.K_r:
+            return input_handlers.MainGameEventHandler(new_game("r"))
+        elif event.sym == tcod.event.K_c:
+            return input_handlers.MainGameEventHandler(new_game("c"))
 
         return None
