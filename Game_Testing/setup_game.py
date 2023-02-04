@@ -38,6 +38,12 @@ def new_game(character) -> Engine:
         player = copy.deepcopy(entity_factories.aries)
     elif character == "aphrodite":
         player = copy.deepcopy(entity_factories.aphrodite)
+    elif character == "zeus":
+        player = copy.deepcopy(entity_factories.zeus)
+    elif character == "athena":
+        player = copy.deepcopy(entity_factories.athena)
+    elif character == "persephone":
+        player = copy.deepcopy(entity_factories.persephone)
 
     engine = Engine(player=player)
 
@@ -118,7 +124,7 @@ class MainMenu(input_handlers.BaseEventHandler):
     def ev_keydown(
         self, event: tcod.event.KeyDown
     ) -> Optional[input_handlers.BaseEventHandler]:
-        character = random.randint(1, 3)
+        character = random.randint(1, 6)
         if event.sym in (tcod.event.K_q, tcod.event.K_ESCAPE):
             raise SystemExit()
         elif event.sym == tcod.event.K_l:
@@ -135,6 +141,12 @@ class MainMenu(input_handlers.BaseEventHandler):
                 return input_handlers.MainGameEventHandler(new_game("artemis"))
             elif character == 2:
                 return input_handlers.MainGameEventHandler(new_game("aries"))
+            elif character == 3:
+                return input_handlers.MainGameEventHandler(new_game("zeus"))
+            elif character == 4:
+                return input_handlers.MainGameEventHandler(new_game("athena"))
+            elif character == 5:
+                return input_handlers.MainGameEventHandler(new_game("persephone"))
             else:
                 return input_handlers.MainGameEventHandler(new_game("aphrodite"))
         

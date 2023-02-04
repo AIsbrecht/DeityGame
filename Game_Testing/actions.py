@@ -4,6 +4,7 @@ from typing import Optional, Tuple, TYPE_CHECKING
 
 import color
 import exceptions
+import random
 
 if TYPE_CHECKING:
    from engine import Engine
@@ -135,7 +136,16 @@ class MeleeAction(ActionWithDirection):
         target = self.target_actor
         if not target:
             raise exceptions.Impossible("Nothing to attack.")
-        damage = self.entity.fighter.power - target.fighter.defense
+        crit_test = random.randint(1, 20)
+        if crit_test == 20:
+            crit = True
+        else:
+            crit = False
+        if crit == True:
+            power = self.entity.fighter.power * 2
+        else:
+            power = self.entity.fighter.power
+        damage = power - target.fighter.defense
 
         attack_desc = f"{self.entity.name.capitalize()} attacks {target.name}"
         if self.entity is self.engine.player:
@@ -149,9 +159,11 @@ class MeleeAction(ActionWithDirection):
             )
             target.fighter.hp -= damage
         else:
+            damage = 1
             self.engine.message_log.add_message(
-                f"{attack_desc} but does no damage.", attack_color
+                f"{attack_desc} for {damage} hit point.", attack_color
             )
+            target.fighter.hp -= damage
 
 class MovementAction(ActionWithDirection):
 

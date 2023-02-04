@@ -17,3 +17,8 @@ V_0.1.1
 3/2/2023
 Classes have been switched!
 They are now based on Greek gods and the game now selects them randomly for you at the start of each game. Aries, Artemis, and Aphrodite were all added.
+
+4/2/2023
+Zeus, Persephone, and Athena were added to the random draw! Along with that, crits were added at a starting 1 in 20 chance. This takes effect before defense gets taken out.
+Defense also got another nerf as everything will do at least one damage. This means that if your defense is higher than their attack, they will still hit you for one damage.
+Potions and scrolls spawn less now, and the spawn rate for monsters is much steeper, meaning there will less mobs at the beginning and much more in the later floors.

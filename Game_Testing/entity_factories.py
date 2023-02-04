@@ -12,9 +12,12 @@ player = Actor(char="@", color=(255, 255, 255), name="Player", ai_cls=HostileEne
 knight = Actor(char="@", color=(192, 192, 192), name="Knight", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=30, base_defense=1, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
 rogue = Actor(char="@", color=(0, 0, 0), name="Rogue", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=15, base_defense=1, base_power=4), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
 cleric = Actor(char="@", color=(255, 255, 255), name="Cleric", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=50, base_defense=2, base_power=1), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
-artemis = Actor(char="@", color=(127, 252, 0), name="Artemis's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=25, base_defense=1, base_power=3), inventory=Inventory(capacity=26), level=Level(level_up_base=150),)
-aries = Actor(char="@", color=(255, 0, 0), name="Aries's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=20, base_defense=2, base_power=4), inventory=Inventory(capacity=26), level=Level(level_up_base=250),)
-aphrodite = Actor(char="@", color=(231, 84, 128), name="Aphrodite's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=50, base_defense=1, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=250),)
+artemis = Actor(char="@", color=(127, 252, 0), name="Artemis's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=25, base_defense=1, base_power=3), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
+aries = Actor(char="@", color=(255, 0, 0), name="Aries's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=20, base_defense=2, base_power=4), inventory=Inventory(capacity=26), level=Level(level_up_base=300),)
+aphrodite = Actor(char="@", color=(231, 84, 128), name="Aphrodite's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=50, base_defense=1, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=150),)
+zeus = Actor(char="@", color=(255, 255, 0), name="Zeus's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=25, base_defense=2, base_power=3), inventory=Inventory(capacity=26), level=Level(level_up_base=250),)
+athena = Actor(char="@", color=(255, 255, 255), name="Athena's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=15, base_defense=3, base_power=4), inventory=Inventory(capacity=26), level=Level(level_up_base=150),)
+persephone = Actor(char="@", color=(230, 230, 250), name="Persephone's Child", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=25, base_defense=4, base_power=2), inventory=Inventory(capacity=26), level=Level(level_up_base=200),)
 #walkthrough hostiles
 orc = Actor(char="o", color=(63, 127, 63), name="Orc", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=10, base_defense=0, base_power=3), inventory=Inventory(capacity=0), level=Level(xp_given=30),)#weak mob
 troll = Actor(char="T", color=(0, 127, 0), name="Troll", ai_cls=HostileEnemy, equipment=Equipment(), fighter=Fighter(hp=16, base_defense=1, base_power=4), inventory=Inventory(capacity=0), level=Level(xp_given=75),)#semi weak mob
@@ -54,28 +57,28 @@ health_potion = Item(
     char="!",
     color=(127, 0, 255),
     name="Health Potion",
-    consumable=consumable.HealingConsumable(amount=4),
+    consumable=consumable.HealingConsumable(amount=5),
 )
 
 stronger_health_potion = Item(
     char="!",
     color=(127, 0, 255),
     name="Stronger Health Potion",
-    consumable=consumable.HealingConsumable(amount=10),
+    consumable=consumable.HealingConsumable(amount=12),
 )
 
 extreme_health_potion = Item(
     char="!",
     color=(127, 0, 255),
     name="Extreme Health Potion",
-    consumable=consumable.HealingConsumable(amount=10),
+    consumable=consumable.HealingConsumable(amount=25),
 )
 
 full_health_potion = Item(
     char="!",
     color=(127, 0, 255),
     name="Full Health Potion",
-    consumable=consumable.HealingConsumable(amount= 30),
+    consumable=consumable.HealingConsumable(amount= 100),
 )
 
 #scrolls

@@ -15,21 +15,22 @@ if TYPE_CHECKING:
 
 max_items_by_floor = [
     (1, 1),
-    (4, 2),
+    (4, 1),
 ]
 
 max_monsters_by_floor = [
-    (1, 2),
-    (4, 3),
-    (6, 5),
+    (1, 1),
+    (4, 2),
+    (6, 4),
+    (10, 6)
 ]
 
 item_chances: Dict[int, List[Tuple[Entity, int]]] = {
-    0: [(entity_factories.health_potion, 35)],
+    0: [(entity_factories.health_potion, 15)],
     2: [(entity_factories.confusion_scroll, 10)],
-    3: [(entity_factories.stronger_health_potion, 20)],
+    3: [(entity_factories.stronger_health_potion, 12)],
     4: [(entity_factories.lightning_scroll, 25), (entity_factories.chain_mail, 15)],
-    5: [(entity_factories.extreme_health_potion, 15), (entity_factories.sword, 5)],
+    5: [(entity_factories.extreme_health_potion, 10), (entity_factories.sword, 5)],
     6: [(entity_factories.fireball_scroll, 25)],
     7: [(entity_factories.full_health_potion, 5)],
 }
@@ -42,8 +43,8 @@ enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
     5: [(entity_factories.troll, 30), (entity_factories.chimera, 5)],
     7: [(entity_factories.troll, 60), (entity_factories.chimera, 10), (entity_factories.minotaur, 20), (entity_factories.lamia, 15)],
     8: [(entity_factories.lamia, 40), (entity_factories.hydra, 10), (entity_factories.hydra, 5)], 
-    10: [(entity_factories.hydra, 20), (entity_factories.echidna, 1)],
-    12: [(entity_factories.echidna, 10)],
+    10: [(entity_factories.hydra, 20), (entity_factories.echidna, 1), (entity_factories.Icarus, 1)],
+    12: [(entity_factories.echidna, 10), (entity_factories.Icarus, 5)],
     15: [(entity_factories.echidna, 25)],
     20: [(entity_factories.echidna, 50), (entity_factories.typhon, 1)],
     25: [(entity_factories.typhon, 25)],
