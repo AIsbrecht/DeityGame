@@ -164,6 +164,7 @@ class MeleeAction(ActionWithDirection):
                 f"{attack_desc} for {damage} hit point.", attack_color
             )
             target.fighter.hp -= damage
+            #if the ability is rooted, do rooted
 
 class MovementAction(ActionWithDirection):
 

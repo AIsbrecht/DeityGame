@@ -88,7 +88,30 @@ class ConfusedEnemy(BaseAI):
             # The actor will either try to move or attack in the chosen random direction.
             # Its possible the actor will just bump into the wall, wasting a turn.
             return BumpAction(self.entity, direction_x, direction_y,).perform()
+        
+class RootedEnemy(BaseAI):
+    def __init__(
+        self, entity: Actor, previous_ai: Optional[BaseAI], turns_remaining: int
+    ):
+        super().__init__(entity)
 
+        self.previous_ai = previous_ai
+        self.turns_remaining = turns_remaining
+
+    def perform(self) -> None:
+        # Revert the AI back to the original state if the effect has run its course.
+        if self.turns_remaining <= 0:
+            self.engine.message_log.add_message(
+                f"The {self.entity.name} is no longer confused."
+            )
+            self.entity.ai = self.previous_ai
+        else:
+            rand = random.randint(1,2)
+            direction_x, direction_y = (0,0)
+            if rand == 1:
+                self.turns_remaining -= 1
+        return BumpAction(self.entity, direction_x, direction_y).perform()
+    
 class HostileEnemy(BaseAI):
     def __init__(self, entity: Actor):
         super().__init__(entity)

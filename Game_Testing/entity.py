@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from level import Level
     from equipment import Equipment
     from game_map import GameMap
+    from ability import Ability
 
 T = TypeVar("T", bound="Entity")
 
@@ -87,6 +88,7 @@ class Actor(Entity):
         fighter: Fighter,
         inventory: Inventory,
         level: Level,
+        ability: Ability,
     ):
         super().__init__(x=x, y=y, char=char, color=color, name=name, blocks_movement=True, render_order=RenderOrder.ACTOR,)
 
