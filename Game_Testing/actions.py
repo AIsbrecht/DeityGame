@@ -165,6 +165,8 @@ class MeleeAction(ActionWithDirection):
             )
             target.fighter.hp -= damage
             #if the ability is rooted, do rooted
+        if self.entity.ability == "Rooted":
+            pass
 
 class MovementAction(ActionWithDirection):
 
